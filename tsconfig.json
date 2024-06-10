@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "target": "ES2015",
+        "module": "commonjs",
+        "lib": ["dom", "ESNEXT"],
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "outDir": "./bundle/js",
+        "strict": false,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "resolveJsonModule": true,
+        "noUnusedLocals": true,
+        "strictPropertyInitialization": true
+    },
+    "include": ["./src/**/*.ts", "./src/declarations.d.ts"]
+}

@@ -1,0 +1,44 @@
+name: Build
+
+on:
+  push:
+      branches:
+          - main
+  pull_request:
+      branches:
+          - main
+
+jobs:
+    build:
+        runs-on: ubuntu-22.04
+        name: Build
+        steps:
+            - name: Checkout current commit/branch/tag
+              uses: actions/checkout@v3
+
+            - name: Set up pnpm
+              uses: pnpm/action-setup@v2
+              with:
+                  version: 8
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 20.10.0
+                  cache: pnpm
+
+            - name: Install dependencies
+              run: pnpm install
+              env:
+                NODE_ENV: development
+
+            - name: Prettier check
+              run: pnpm exec prettier --check src/**/*
+
+            - name: Run tests
+              run: pnpm test
+
+            - name: Bundle files
+              run: pnpm bundle
+              env:
+                  NODE_ENV: production
